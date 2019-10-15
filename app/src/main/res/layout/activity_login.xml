@@ -1,96 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="#fff">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="225dp"
-        android:orientation="vertical"
-        android:background="@color/colorPrimary">
-        <ImageView
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/logo"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="서경대학교"
-            android:textColor="#000000"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="컴퓨터과학과"
-            android:textColor="#000000"
-            android:textSize="18dp"
-            android:textStyle="bold"/>
-    </LinearLayout>
 
-    <LinearLayout
+
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <EditText
-        android:layout_width="280dp"
+        android:background="@drawable/welcomeclass"
+
+        >
+<!--        <customfonts.MyTextView-->
+<!--            android:id="@+id/head"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Welcome"-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="34dp"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            />-->
+        <!--/>-->
+
+
+
+
+
+
+    </FrameLayout>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="아이디"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
-        android:id="@+id/idText"
-        android:drawableStart="@drawable/ic_person_black_24dp"
-        android:drawableLeft="@drawable/ic_person_black_24dp"
-        android:layout_marginTop="50dp"
-        android:background="@color/colorPrimary"/>
-        <EditText
-            android:inputType="textPassword"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:hint="비밀번호"
-            android:layout_gravity="center"
-            android:padding="10dp"
-            android:textColor="#000000"
-            android:textColorHint="#000000"
-            android:id="@+id/passwordText"
-            android:drawableStart="@drawable/ic_enhanced_encryption_black_24dp"
-            android:drawableLeft="@drawable/ic_enhanced_encryption_black_24dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorPrimary"/>
-        <Button
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:background="@color/colorPrimaryDark"
-            android:text="로그인"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"/>
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="60dp">
+
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Get connected with"
+            android:lines="1"
+
+            android:textColor="#9d9ea0"
+            android:gravity="center"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="the best University"
+            android:gravity="center"
+            android:lines="2"
+            android:paddingBottom="21dp"
+            android:textColor="#9d9ea0"
+
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="회원가입"
-            android:id="@+id/registerButton"/>
+            android:orientation="horizontal"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            >
+
+
+            <TextView
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:id="@+id/student"
+                android:textSize="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Student"
+                android:textColor="#fff"
+                android:background="@drawable/rect"
+                android:padding="10dp"
+                android:gravity="center"
+                />
+
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:id="@+id/teacher"
+                android:textSize="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Teacher"
+                android:textColor="#fff"
+                android:background="@drawable/rect2"
+                android:padding="10dp"
+                android:gravity="center"
+                />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
+
+
+

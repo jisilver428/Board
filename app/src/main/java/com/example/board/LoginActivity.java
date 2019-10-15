@@ -12,38 +12,57 @@ import android.widget.TextView;
 import java.io.File;
 
 public class LoginActivity extends AppCompatActivity {
-    SQLiteDatabase sqlliteDB;
+//    SQLiteDatabase sqlliteDB;
+    TextView student,teacher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        sqlliteDB=init_database();
+//        sqlliteDB=init_database();
 
-        TextView registerButton= (TextView)findViewById(R.id.registerButton);
-        registerButton.setOnClickListener(new View.OnClickListener(){
+//        TextView registerButton= (TextView)findViewById(R.id.registerButton);
+//        registerButton.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View view) {
+//                Intent registerIntent=new Intent(LoginActivity.this, RegisterActivity.class);
+//                LoginActivity.this.startActivity(registerIntent);
+//            }
+//        });
 
+        student=(TextView)findViewById(R.id.student);
+        teacher=(TextView)findViewById(R.id.teacher);
+
+        teacher.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent registerIntent=new Intent(LoginActivity.this, RegisterActivity.class);
-                LoginActivity.this.startActivity(registerIntent);
+            public void onClick(View v) {
+                Intent it=new Intent(LoginActivity.this, LoginProfessor.class);
+                startActivity(it);
+            }
+        });
+
+        student.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it=new Intent(LoginActivity.this, LoginStudent.class);
+                startActivity(it);
             }
         });
     }
-//수정
-    private SQLiteDatabase init_database(){
-        SQLiteDatabase db=null;
-        File file=new File(getFilesDir(), "contact.db");
-        System.out.println("PATH: "+file.toString());
-        try{
-            db=SQLiteDatabase.openOrCreateDatabase(file,null);
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        if (db==null){
-            System.out.println("DB creation fail."+file.getAbsolutePath());
-        }
-        return db;
-    }
+//    private SQLiteDatabase init_database(){
+//        SQLiteDatabase db=null;
+//        File file=new File(getFilesDir(), "contact.db");
+//        System.out.println("PATH: "+file.toString());
+//        try{
+//            db=SQLiteDatabase.openOrCreateDatabase(file,null);
+//
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//        if (db==null){
+//            System.out.println("DB creation fail."+file.getAbsolutePath());
+//        }
+//        return db;
+//    }
 }
