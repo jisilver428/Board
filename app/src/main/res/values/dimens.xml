@@ -3,4 +3,9 @@
 
     <dimen name="spacing_large">15dp</dimen>
     <dimen name="spacing_xxlarge">50dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="standard_field_width">200dp</dimen>
 </resources>

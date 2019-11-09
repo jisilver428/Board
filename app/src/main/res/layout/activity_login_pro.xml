@@ -159,7 +159,7 @@
         <TextView
 
             android:id="@+id/signin1"
-            android:onClick="signIn"
+            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rect1"
@@ -173,8 +173,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="11dp"
             android:elevation="3dp"
-
             />
+
 
 
 
@@ -223,9 +223,13 @@
 
             >
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/registerButton"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+
+                android:background="@drawable/ic_search"
+                android:padding="12dp"
+
                 ></Button>
 
 <!--            <ImageView-->
@@ -252,6 +256,7 @@
             >
 
             <ImageView
+                android:id="@+id/google"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/google"

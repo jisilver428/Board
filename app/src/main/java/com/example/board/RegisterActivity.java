@@ -1,129 +1,126 @@
 package com.example.board;
 
+
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-
-import android.widget.EditText;
-
-
-import com.google.firebase.auth.FirebaseAuth;
-
-import android.util.Patterns;
-import android.view.View;
-
-import android.widget.Toast;
-
+import com.example.board.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-
-
-import java.util.regex.Pattern;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.UploadTask;
 
 public class RegisterActivity extends AppCompatActivity {
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{4,16}$");
-
-    // 파이어베이스 인증 객체 생성
-    private FirebaseAuth firebaseAuth;
 
     // 이메일과 비밀번호
-    private EditText editTextEmail;
-    private EditText editTextPassword;
+    private EditText email;
+    private EditText password;
+    private EditText name;
+    private Button signup;
+    private ImageView profile;
+    private Uri imageUri;
+    private static final int PICK_FROM_ALBUM=10;
 
-    private String email = "";
-    private String password = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.testxml);
+        setContentView(R.layout.activity_register);
+        profile=(ImageView)findViewById(R.id.signupActivity_imageview_profile) ;
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Intent.ACTION_PICK);
+                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                startActivityForResult(intent, PICK_FROM_ALBUM);
+            }
+        });
 
-        // 파이어베이스 인증 객체 선언
-        firebaseAuth = FirebaseAuth.getInstance();
 
-        editTextEmail = findViewById(R.id.et_eamil);
-        editTextPassword = findViewById(R.id.et_password);
-    }
+        email=(EditText)findViewById(R.id.et_eamil);
+        password=(EditText)findViewById(R.id.et_password);
+        name=(EditText)findViewById(R.id.et_name);
+        signup=(Button)findViewById(R.id.btn_signUp);
 
-    public void singUp(View view) {
-        email = editTextEmail.getText().toString();
-        password = editTextPassword.getText().toString();
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        if(isValidEmail() && isValidPasswd()) {
-            createUser(email, password);
-        }
-    }
-
-    public void signIn(View view) {
-        email = editTextEmail.getText().toString();
-        password = editTextPassword.getText().toString();
-
-        if(isValidEmail() && isValidPasswd()) {
-            loginUser(email, password);
-        }
-    }
-
-    // 이메일 유효성 검사
-    private boolean isValidEmail() {
-        if (email.isEmpty()) {
-            // 이메일 공백
-            return false;
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            // 이메일 형식 불일치
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    // 비밀번호 유효성 검사
-    private boolean isValidPasswd() {
-        if (password.isEmpty()) {
-            // 비밀번호 공백
-            return false;
-        } else if (!PASSWORD_PATTERN.matcher(password).matches()) {
-            // 비밀번호 형식 불일치
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    // 회원가입
-    private void createUser(String email, String password) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                if(email.getText().toString()==null || name.getText().toString()==null || password.getText().toString()==null){
+                    return;
+                }
+                FirebaseAuth.getInstance()
+                        .createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
+                        .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // 회원가입 성공
-                            Toast.makeText(RegisterActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
-                        } else {
-                            // 회원가입 실패
-                            Toast.makeText(RegisterActivity.this, R.string.failed_signup, Toast.LENGTH_SHORT).show();
-                        }
+                        final String uid=task.getResult().getUser().getUid();
+//                        FirebaseStorage.getInstance().getReference().child("userImages")
+//                                .child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+//                                @SuppressWarnings("VisibleForTests")
+//                                String imageUri=task.getResult().getUploadSessionUri().toString();
+//
+//                                UserModel userModel=new UserModel();
+//                                userModel.userName=name.getText().toString();
+//                                userModel.profileImageUrl=imageUri;
+//                                userModel.uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
+//
+//                                FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void aVoid) {
+//                                        RegisterActivity.this.finish();
+//                                    }
+//                                });
+//                            }
+//                        });
+                        FirebaseStorage.getInstance().getReference().child("userImages")
+                                .child(uid).putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                FirebaseStorage.getInstance().getReference().child("userImages").child(uid).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        String imageUri=uri.toString();
+                                        UserModel userModel=new UserModel();
+                                        userModel.userName=name.getText().toString();
+                                        userModel.profileImageUrl=imageUri;
+                                        userModel.uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                        FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
+                                        RegisterActivity.this.finish();
+
+                                    }
+                                });
+                            }
+                        });
+
                     }
                 });
+            }
+        });
     }
 
-    // 로그인
-    private void loginUser(String email, String password)
-    {
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // 로그인 성공
-                            Toast.makeText(RegisterActivity.this, R.string.success_login, Toast.LENGTH_SHORT).show();
-                        } else {
-                            // 로그인 실패
-                            Toast.makeText(RegisterActivity.this, R.string.failed_login, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){
+            profile.setImageURI(data.getData()); //가운데 뷰를 바꿈
+            imageUri=data.getData(); //이미지 경로 원본
+        }
     }
-
 }

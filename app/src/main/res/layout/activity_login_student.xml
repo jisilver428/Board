@@ -42,14 +42,14 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email1"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorhint"
             android:textColor="@color/colortext">
 
             <EditText
-
+                android:id="@+id/email2"
                 android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:layout_marginLeft="46dp"
                 android:textColorHint="@color/colorhint"
                 android:textColor="@color/colortext"
-                android:maxLength="12"
+                android:maxLength="30"
                 android:background="#0000"
                 android:padding="16dp"
                 android:gravity="left"
@@ -79,7 +79,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorhint"
@@ -88,7 +88,7 @@
 
 
             <EditText
-
+                android:id="@+id/password2"
                 android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -225,16 +225,18 @@
 
 
             >
+
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/registerButton"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+
+                android:background="@drawable/ic_search"
+                android:padding="12dp"
+
                 ></Button>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="12dp"/>
+
 <!--                android:src="@drawable/fb"-->
 
 
