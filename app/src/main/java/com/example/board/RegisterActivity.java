@@ -70,26 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         final String uid=task.getResult().getUser().getUid();
-//                        FirebaseStorage.getInstance().getReference().child("userImages")
-//                                .child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-//                                @SuppressWarnings("VisibleForTests")
-//                                String imageUri=task.getResult().getUploadSessionUri().toString();
-//
-//                                UserModel userModel=new UserModel();
-//                                userModel.userName=name.getText().toString();
-//                                userModel.profileImageUrl=imageUri;
-//                                userModel.uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
-//
-//                                FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                    @Override
-//                                    public void onSuccess(Void aVoid) {
-//                                        RegisterActivity.this.finish();
-//                                    }
-//                                });
-//                            }
-//                        });
+
                         FirebaseStorage.getInstance().getReference().child("userImages")
                                 .child(uid).putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override

@@ -74,6 +74,7 @@ public class MessageActivity extends AppCompatActivity {
                     ChatModel.Comment comment=new ChatModel.Comment();
                     comment.uid=uid;
                     comment.message=editText.getText().toString(); //메세지 보내는 부분
+                    //firebase 메시지 보내는부분(통신)
                     FirebaseDatabase.getInstance().getReference().child("chatrooms").child(chatRoomUid).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -131,6 +132,7 @@ public class MessageActivity extends AppCompatActivity {
             });
 
         }
+        //메시지 받는부분(통신)
         void getMessageList(){
             FirebaseDatabase.getInstance().getReference().child("chatrooms").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
                 @Override
@@ -215,4 +217,11 @@ public class MessageActivity extends AppCompatActivity {
             }
         }
     }
+
+//    @Override
+//    public void onBackPressed() {
+////        super.onBackPressed();
+//        finish();
+//        overridePendingTransition(R.anim.fromleft, R.anim.toright);
+//    }
 }

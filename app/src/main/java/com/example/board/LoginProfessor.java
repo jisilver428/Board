@@ -103,57 +103,6 @@ public class LoginProfessor extends AppCompatActivity {
         };
     }
 
-//    public void signIn(View view){
-//        email=editTextEmail.getText().toString();
-//        password=editTextPassword.getText().toString();
-//
-//        if(isValidEmail()&& isValidPasswd()){
-//            loginUser(email,password);
-//            Intent it=new Intent(LoginProfessor.this,MenuPage.class);
-//            startActivity(it);
-//        }
-//    }
-
-//    private boolean isValidEmail() {
-//        if (email.isEmpty()) {
-//            // 이메일 공백
-//            return false;
-//        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//            // 이메일 형식 불일치
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
-//
-//    private boolean isValidPasswd() {
-//        if (password.isEmpty()) {
-//            // 비밀번호 공백
-//            return false;
-//        } else if (!PASSWORD_PATTERN.matcher(password).matches()) {
-//            // 비밀번호 형식 불일치
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
-    
-//    private void loginUser(String email, String password){
-////        firebaseAuth.signInWithEmailAndPassword(email, password)
-////                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-////                    @Override
-////                    public void onComplete(@NonNull Task<AuthResult> task) {
-////                        if(task.isSuccessful()){
-////                            Toast.makeText(LoginProfessor.this,R.string.success_login,Toast.LENGTH_SHORT).show();
-////                            Intent goit=new Intent(LoginProfessor.this, MainActivity.class);
-////                            startActivity(goit);
-////                            finish();
-////                        }else {
-////                            Toast.makeText(LoginProfessor.this,R.string.failed_login,Toast.LENGTH_SHORT).show();
-////                        }
-////                    }
-////                });
-////    }
 
     void loginEvent(){
         firebaseAuth.signInWithEmailAndPassword(editTextEmail.getText().toString(),editTextPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
